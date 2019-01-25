@@ -9,7 +9,7 @@ from tap.line import Result
 from tap.parser import Parser
 
 
-class TAP_Plugin:
+class Plugin:
     _statuses = {}
 
     def __init__(self):
@@ -47,7 +47,7 @@ class TAP_Plugin:
             product_name = os.environ.get('TCMS_PRODUCT',
                                           os.environ.get('TRAVIS_REPO_SLUG',
                                                          os.environ.get(
-                                                            'JOB_NAME')))
+                                                             'JOB_NAME')))
             if not product_name:
                 raise Exception('Product name not defined, '
                                 'missing one of TCMS_PRODUCT, '
@@ -89,7 +89,7 @@ class TAP_Plugin:
         build_number = os.environ.get('TCMS_BUILD',
                                       os.environ.get('TRAVIS_BUILD_NUMBER',
                                                      os.environ.get(
-                                                        'BUILD_NUMBER')))
+                                                         'BUILD_NUMBER')))
         if not build_number:
             raise Exception('Build number not defined, '
                             'missing one of TCMS_BUILD, '
@@ -114,7 +114,7 @@ class TAP_Plugin:
         result = self._rpc.TestRun.filter({'pk': run_id})
         if not result:
             product_id, product_name = self.get_product_id(0)
-            version_id, version_val = self.get_version_id(product_id)
+            version_id, _ = self.get_version_id(product_id)
 
             name = '[TAP] Plan for %s' % product_name
 
@@ -224,5 +224,5 @@ def main(argv):
     if len(argv) < 2:
         raise Exception("USAGE: %s results.tap" % argv[0])
 
-    plugin = TAP_Plugin()
+    plugin = Plugin()
     plugin.parse(argv[1])

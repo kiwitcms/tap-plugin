@@ -3,8 +3,11 @@
 from setuptools import setup
 
 
-with open("README.rst") as readme:
+with open('README.rst') as readme:
     LONG_DESCRIPTION = readme.read()
+
+
+REQUIREMENTS = open('requirements.txt').readlines()
 
 
 setup(name='kiwitcms-tap-plugin',
@@ -17,6 +20,7 @@ setup(name='kiwitcms-tap-plugin',
       author_email='info@kiwitcms.org',
       license='GPLv3+',
       url='https://github.com/kiwitcms/tap-plugin',
+      install_requires=REQUIREMENTS,
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Console',

@@ -3,7 +3,7 @@ cache: pip
 python:
   - 3.6
 install:
-  - pip install nose coverage
+  - pip install nose coverage flake8 pylint
   - pip install -r requirements.txt
 script:
   - make ci

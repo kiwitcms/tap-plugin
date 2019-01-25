@@ -10,7 +10,7 @@ pylint:
 
 .PHONY: test
 test:
-	nosetests --with-coverage --cover-erase --cover-package=tap_plugin
+	nosetests --with-coverage --cover-erase --cover-package=tap_plugin --with-tap --tap-stream
 
 
 .PHONY: ci

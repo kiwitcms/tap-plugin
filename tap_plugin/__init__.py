@@ -138,7 +138,6 @@ class Plugin:
         return result[0]['plan_id']
 
     def get_run_id(self):
-        # todo: TestRun may not exist in DB
         run_id = os.environ.get('TCMS_RUN_ID')
 
         if not run_id:

@@ -19,13 +19,19 @@ class TAP_Plugin:
         self.plan_id = self.get_plan_id(self.run_id)
         self.product_id, _ = self.get_product_id(self.plan_id)
 
-        self.category_id = self._rpc.Category.filter({'product': self.product_id})[0]['id']
+        self.category_id = self._rpc.Category.filter({
+            'product': self.product_id
+        })[0]['id']
         self.priority_id = self._rpc.Priority.filter({})[0]['id']
-        self.confirmed_id = self._rpc.TestCaseStatus.filter({'name': 'CONFIRMED'})[0]['id']
+        self.confirmed_id = self._rpc.TestCaseStatus.filter({
+            'name': 'CONFIRMED'
+        })[0]['id']
 
     def get_status_id(self, name):
         if name not in self._statuses:
-            self._statuses[name] = self._rpc.TestCaseRunStatus.filter({'name': name})[0]['id']
+            self._statuses[name] = self._rpc.TestCaseRunStatus.filter({
+                'name': name
+            })[0]['id']
 
         return self._statuses[name]
 
@@ -40,29 +46,41 @@ class TAP_Plugin:
         else:
             product_name = os.environ.get('TCMS_PRODUCT',
                                           os.environ.get('TRAVIS_REPO_SLUG',
-                                                         os.environ.get('JOB_NAME')))
+                                                         os.environ.get(
+                                                            'JOB_NAME')))
             if not product_name:
-                raise Exception("Product name not defined, missing one of TCMS_PRODUCT, TRAVIS_REPO_SLUG or JOB_NAME")
+                raise Exception('Product name not defined, '
+                                'missing one of TCMS_PRODUCT, '
+                                'TRAVIS_REPO_SLUG or JOB_NAME')
 
             product = self._rpc.Product.filter({'name': product_name})
             if not product:
-                classification_id = self._rpc.Classification.filter({})[0]['id']
-                product = [self._rpc.Product.create({'name': product_name, 'classification_id': classification_id})]
+                class_id = self._rpc.Classification.filter({})[0]['id']
+                product = [self._rpc.Product.create({
+                    'name': product_name,
+                    'classification_id': class_id
+                })]
             product_id = product[0]['id']
 
         return product_id, product_name
 
     def get_version_id(self, product_id):
-        version_val = os.environ.get('TCMS_PRODUCT_VERSION',
-                                     os.environ.get('TRAVIS_COMMIT',
-                                                    os.environ.get('TRAVIS_PULL_REQUEST_SHA',
-                                                                   os.environ.get('GIT_COMMIT'))))
+        version_val = os.environ.get(
+            'TCMS_PRODUCT_VERSION',
+            os.environ.get('TRAVIS_COMMIT',
+                           os.environ.get('TRAVIS_PULL_REQUEST_SHA',
+                                          os.environ.get('GIT_COMMIT'))))
         if not version_val:
-            raise Exception("Version value not defined, missing one of TCMS_PRODUCT_VERSION, TRAVIS_COMMIT, TRAVIS_PULL_REQUEST_SHA or GIT_COMMIT")
+            raise Exception('Version value not defined, '
+                            'missing one of TCMS_PRODUCT_VERSION, '
+                            'TRAVIS_COMMIT, TRAVIS_PULL_REQUEST_SHA '
+                            'or GIT_COMMIT')
 
-        version = self._rpc.Version.filter({'product': product_id, 'value': version_val})
+        version = self._rpc.Version.filter({'product': product_id,
+                                            'value': version_val})
         if not version:
-            version = [self._rpc.Version.create({'product': product_id, 'value': version_val})]
+            version = [self._rpc.Version.create({'product': product_id,
+                                                 'value': version_val})]
 
         return version[0]['id'], version_val
 
@@ -70,13 +88,18 @@ class TAP_Plugin:
         # for _version_id see https://github.com/kiwitcms/Kiwi/issues/246
         build_number = os.environ.get('TCMS_BUILD',
                                       os.environ.get('TRAVIS_BUILD_NUMBER',
-                                                     os.environ.get('BUILD_NUMBER')))
+                                                     os.environ.get(
+                                                        'BUILD_NUMBER')))
         if not build_number:
-            raise Exception('Build number not defined, missing one of TCMS_BUILD, TRAVIS_BUILD_NUMBER or BUILD_NUMBER')
+            raise Exception('Build number not defined, '
+                            'missing one of TCMS_BUILD, '
+                            'TRAVIS_BUILD_NUMBER or BUILD_NUMBER')
 
-        build = self._rpc.Build.filter({'name': build_number, 'product': product_id})
+        build = self._rpc.Build.filter({'name': build_number,
+                                        'product': product_id})
         if not build:
-            build = [self._rpc.Build.create({'name': build_number, 'product': product_id})]
+            build = [self._rpc.Build.create({'name': build_number,
+                                             'product': product_id})]
 
         return build[0]['build_id'], build_number
 
@@ -96,8 +119,8 @@ class TAP_Plugin:
             name = '[TAP] Plan for %s' % product_name
 
             result = self._rpc.TestPlan.filter({'name': name,
-                                          'product': product_id,
-                                          'product_version': version_id})
+                                                'product': product_id,
+                                                'product_version': version_id})
 
             if not result:
                 plan_type_id = self.get_plan_type_id()
@@ -122,10 +145,13 @@ class TAP_Plugin:
             version_id, version_val = self.get_version_id(product_id)
             build_id, build_number = self.get_build_id(product_id, version_id)
             plan_id = self.get_plan_id(0)
-            user_id = self._rpc.User.filter()[0]['id']  # the user issuing the request
+            # the user issuing the request
+            user_id = self._rpc.User.filter()[0]['id']
 
             testrun = self._rpc.TestRun.create({
-                'summary': '[TAP] Results for %s, %s, %s' % (product_name, version_val, build_number),
+                'summary': '[TAP] Results for %s, %s, %s' % (
+                    product_name, version_val, build_number
+                ),
                 'manager': user_id,
                 'plan': plan_id,
                 'build': build_id,
@@ -165,7 +191,8 @@ class TAP_Plugin:
             self.add_test_case_to_plan(test_case['case_id'], self.plan_id)
 
             # todo: don't add case to run if it is already there
-            test_case_run = self._rpc.TestRun.add_case(self.run_id, test_case['case_id'])
+            test_case_run = self._rpc.TestRun.add_case(self.run_id,
+                                                       test_case['case_id'])
 
             comment = 'Result recorded via Kiwi TCMS tap-plugin'
 
@@ -186,7 +213,8 @@ class TAP_Plugin:
                 'status': status_id,
             })
 
-            self._rpc.TestCaseRun.add_comment(test_case_run['case_run_id'], comment)
+            self._rpc.TestCaseRun.add_comment(test_case_run['case_run_id'],
+                                              comment)
 
             if progress_cb:
                 progress_cb()

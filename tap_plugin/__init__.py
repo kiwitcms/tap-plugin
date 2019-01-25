@@ -11,6 +11,7 @@ from tap.parser import Parser
 
 class Plugin:
     _statuses = {}
+    _cases_in_test_run = {}
 
     def __init__(self):
         self._rpc = tcms_api.TCMS().exec
@@ -158,6 +159,11 @@ class Plugin:
             })
             run_id = testrun['run_id']
 
+        # fetch pre-existing test cases in this TestRun
+        # used to avoid adding existing TC to TR later
+        for case in self._rpc.TestRun.get_cases(run_id):
+            self._cases_in_test_run[case['case_id']] = case['case_run_id']
+
         return run_id
 
     def test_case_get_or_create(self, summary):
@@ -182,18 +188,23 @@ class Plugin:
         if not self._rpc.TestCase.filter({'pk': case_id, 'plan': plan_id}):
             self._rpc.TestPlan.add_case(plan_id, case_id)
 
+    def add_test_case_to_run(self, case_id, run_id):
+        if case_id in self._cases_in_test_run.keys():
+            return self._cases_in_test_run[case_id]
+
+        return self._rpc.TestRun.add_case(run_id, case_id)['case_run_id']
+
     def parse(self, tap_file, progress_cb=None):
+
         for line in Parser().parse_file(tap_file):
             if not isinstance(line, Result):
                 continue
 
-            test_case = self.test_case_get_or_create(line.description)
-            self.add_test_case_to_plan(test_case['case_id'], self.plan_id)
-
-            # todo: don't add case to run if it is already there
-            test_case_run = self._rpc.TestRun.add_case(self.run_id,
-                                                       test_case['case_id'])
-
+            test_case_id = self.test_case_get_or_create(
+                line.description)['case_id']
+            self.add_test_case_to_plan(test_case_id, self.plan_id)
+            test_case_run_id = self.add_test_case_to_run(test_case_id,
+                                                         self.run_id)
             comment = 'Result recorded via Kiwi TCMS tap-plugin'
 
             if line.ok:
@@ -209,12 +220,10 @@ class Plugin:
                 status_id = self.get_status_id('PAUSED')
                 comment = line.directive.text
 
-            self._rpc.TestCaseRun.update(test_case_run['case_run_id'], {
-                'status': status_id,
-            })
+            self._rpc.TestCaseRun.update(test_case_run_id,
+                                         {'status': status_id})
 
-            self._rpc.TestCaseRun.add_comment(test_case_run['case_run_id'],
-                                              comment)
+            self._rpc.TestCaseRun.add_comment(test_case_run_id, comment)
 
             if progress_cb:
                 progress_cb()

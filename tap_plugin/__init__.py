@@ -10,10 +10,11 @@ from tap.parser import Parser
 
 
 class TAP_Plugin:
-    _rpc = tcms_api.TCMS().exec
     _statuses = {}
 
     def __init__(self):
+        self._rpc = tcms_api.TCMS().exec
+
         self.run_id = self.get_run_id()
         self.plan_id = self.get_plan_id(self.run_id)
         self.product_id, _ = self.get_product_id(self.plan_id)
@@ -189,3 +190,11 @@ class TAP_Plugin:
 
             if progress_cb:
                 progress_cb()
+
+
+def main(argv):
+    if len(argv) < 2:
+        raise Exception("USAGE: %s results.tap" % argv[0])
+
+    plugin = TAP_Plugin()
+    plugin.parse(argv[1])

@@ -4,18 +4,8 @@
 
 # Licensed under the GPLv3: https://www.gnu.org/licenses/gpl.html
 
-import sys
-
-from tap_plugin import TAP_Plugin
-
-
-def main():
-    if len(sys.argv) < 2:
-        raise Exception("USAGE: %s results.tap" % __file__)
-
-    plugin = TAP_Plugin()
-    plugin.parse(sys.argv[1])
-
-
 if __name__ == "__main__":
-    main()
+    import sys
+    from tap_plugin import main
+
+    main(sys.argv)

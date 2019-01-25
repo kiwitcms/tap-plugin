@@ -8,6 +8,10 @@ pylint:
 	pylint -d missing-docstring *.py tap_plugin/ tests/
 
 
-.PHONY: ci
-ci: flake8 pylint
+.PHONY: test
+test:
 	nosetests --with-coverage --cover-erase --cover-package=tap_plugin
+
+
+.PHONY: ci
+ci: flake8 pylint test

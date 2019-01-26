@@ -8,11 +8,11 @@ install:
   - |
 
         cat > ~/.tcms.conf << __EOF__
-        [tcms]
-        url = https://tcms.kiwitcms.org/xml-rpc/
-        username = kiwitcms-bot
-        password = $TCMS_PASSWORD
-        __EOF__
+[tcms]
+url = https://tcms.kiwitcms.org/xml-rpc/
+username = kiwitcms-bot
+password = $TCMS_PASSWORD
+__EOF__
 
 script:
   - make ci

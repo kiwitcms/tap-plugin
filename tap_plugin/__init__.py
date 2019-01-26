@@ -15,7 +15,14 @@ class Plugin:
 
     def __init__(self):
         self._rpc = tcms_api.TCMS().exec
+        self.run_id = None
+        self.plan_id = None
+        self.product_id = None
+        self.category_id = None
+        self.priority_id = None
+        self.confirmed_id = None
 
+    def configure(self):
         self.run_id = self.get_run_id()
         self.plan_id = self.get_plan_id(self.run_id)
         self.product_id, _ = self.get_product_id(self.plan_id)
@@ -194,6 +201,7 @@ class Plugin:
         return self._rpc.TestRun.add_case(run_id, case_id)['case_run_id']
 
     def parse(self, tap_file, progress_cb=None):
+        self.configure()
 
         for line in Parser().parse_file(tap_file):
             if not isinstance(line, Result):

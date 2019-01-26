@@ -170,7 +170,7 @@ class Plugin:
         for case in self._rpc.TestRun.get_cases(run_id):
             self._cases_in_test_run[case['case_id']] = case['case_run_id']
 
-        return run_id
+        return int(run_id)
 
     def test_case_get_or_create(self, summary):
         test_case = self._rpc.TestCase.filter({

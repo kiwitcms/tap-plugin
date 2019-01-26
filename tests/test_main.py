@@ -1,3 +1,5 @@
+# pylint: disable=no-self-use
+
 import unittest
 from unittest.mock import patch
 from tap_plugin import main

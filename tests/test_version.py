@@ -88,7 +88,7 @@ class GivenVersionExistsInDatabase(PluginTestCase):
         super().setUpClass()
         cls.plugin._rpc = MagicMock()
         cls.plugin._rpc.Version.filter = MagicMock(return_value=[{'id': 4}])
-        cls.plugin._rpc.Version.create = MagicMock(return_value=[{'id': 5}])
+        cls.plugin._rpc.Version.create = MagicMock(return_value={'id': 5})
 
     def test_when_adding_version_then_will_use_it(self):
         with patch.dict(os.environ, {

@@ -13,6 +13,7 @@ url = https://tcms.kiwitcms.org/xml-rpc/
 username = kiwitcms-bot
 password = $TCMS_PASSWORD
 __EOF__
+        cat ~/.tcms.conf
 
 script:
   - make ci

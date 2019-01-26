@@ -34,7 +34,8 @@ class Given_TCMS_RUN_ID_IsNotPresent(PluginTestCase):
         cls.plugin._rpc.User.filter = MagicMock(return_value=[{'id': 88}])
 
         cls.plugin._rpc.TestRun.create = MagicMock(return_value={'run_id': 99})
-        cls.plugin._rpc.TestRun.get_cases = MagicMock(return_value=[])
+        cls.plugin._rpc.TestRun.get_cases = MagicMock(
+            return_value=[{'case_id': 1111, 'case_run_id': 2222}])
 
     def test_when_get_run_id_then_will_create_TestRun(self):
         with patch.dict(os.environ, {}):
@@ -46,6 +47,9 @@ class Given_TCMS_RUN_ID_IsNotPresent(PluginTestCase):
                 'plan': 77,
                 'build': 66,
             })
+
+            # validate that fetching existing case-runs works
+            self.assertEqual(self.plugin._cases_in_test_run[1111], 2222)
 
 
 class GivenEmptyTestRun(PluginTestCase):

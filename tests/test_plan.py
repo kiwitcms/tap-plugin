@@ -57,10 +57,26 @@ class GivenRunDoesntExistInDatabase(PluginTestCase):
 
 
 class GivenEmptyTestPlan(PluginTestCase):
-    def test_when_parsing_then_TestCase_is_added(self):
-        self.fail('not implemented')
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.plugin._rpc = MagicMock()
+        cls.plugin._rpc.TestCase.filter = MagicMock(return_value=[])
+        cls.plugin._rpc.TestPlan.add_case = MagicMock()
+
+    def test_when_add_test_case_to_plan_then_TestCase_is_added(self):
+        self.plugin.add_test_case_to_plan(11, 22)
+        self.plugin._rpc.TestPlan.add_case.assert_called_with(22, 11)
 
 
 class GivenTestPlanWithTestCases(PluginTestCase):
-    def test_when_parsing_then_existing_TestCase_is_not_added(self):
-        self.fail('not implemented')
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.plugin._rpc = MagicMock()
+        cls.plugin._rpc.TestCase.filter = MagicMock(return_value=[{}])
+        cls.plugin._rpc.TestPlan.add_case = MagicMock()
+
+    def test_when_add_test_case_to_plan_then_TestCase_is_not_added(self):
+        self.plugin.add_test_case_to_plan(11, 22)
+        self.plugin._rpc.TestPlan.add_case.assert_not_called()

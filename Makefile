@@ -5,7 +5,8 @@ flake8:
 
 .PHONY: pylint
 pylint:
-	pylint -d missing-docstring *.py tap_plugin/ tests/
+	pylint -d missing-docstring *.py tap_plugin/
+	pylint -d missing-docstring -d invalid-name -d too-few-public-methods tests/
 
 
 .PHONY: test

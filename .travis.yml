@@ -6,13 +6,10 @@ install:
   - pip install nose nose-tap coverage flake8 pylint
   - pip install -r requirements.txt
   - |
-
         echo "[tcms]" > ~/.tcms.conf
         echo "url = https://tcms.kiwitcms.org/xml-rpc/" >> ~/.tcms.conf
         echo "username = kiwitcms-bot" >> ~/.tcms.conf
         echo "password = $TCMS_PASSWORD" >> ~/.tcms.conf
-
-        cat ~/.tcms.conf
 
 script:
   - make ci

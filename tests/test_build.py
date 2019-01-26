@@ -12,7 +12,7 @@ class Given_TCMS_BUILD_IsPresent(PluginTestCase):
         cls.plugin._rpc.Build.filter = MagicMock(
             return_value=[{'build_id': 40}])
 
-    def test_when_adding_build_then_will_use_it(self):
+    def test_when_get_build_id_then_will_use_it(self):
         with patch.dict(os.environ, {
                 'TCMS_BUILD': 'b.Test',
                 'TRAVIS_BUILD_NUMBER': 'travis-25',
@@ -31,7 +31,7 @@ class Given_TRAVIS_BUILD_NUMBER_IsPresent(PluginTestCase):
         cls.plugin._rpc.Build.filter = MagicMock(
             return_value=[{'build_id': 40}])
 
-    def test_when_adding_build_then_will_use_it(self):
+    def test_when_get_build_id_then_will_use_it(self):
         with patch.dict(os.environ, {
                 'TRAVIS_BUILD_NUMBER': 'travis-25',
                 'BUILD_NUMBER': 'jenkins-48',
@@ -49,7 +49,7 @@ class Given_BUILD_NUMBER_IsPresent(PluginTestCase):
         cls.plugin._rpc.Build.filter = MagicMock(
             return_value=[{'build_id': 40}])
 
-    def test_when_adding_build_then_will_use_it(self):
+    def test_when_get_build_id_then_will_use_it(self):
         with patch.dict(os.environ, {
                 'BUILD_NUMBER': 'jenkins-48',
         }):
@@ -59,7 +59,7 @@ class Given_BUILD_NUMBER_IsPresent(PluginTestCase):
 
 
 class GivenBuildEnvironmentIsNotPresent(PluginTestCase):
-    def test_when_adding_build_then_will_raise(self):
+    def test_when_get_build_id_then_will_raise(self):
         with patch.dict(os.environ, {}):
             with self.assertRaisesRegex(Exception,
                                         'Build number not defined'):
@@ -76,7 +76,7 @@ class GivenBuildExistsInDatabase(PluginTestCase):
         cls.plugin._rpc.Build.create = MagicMock(
             return_value={'build_id': 50})
 
-    def test_when_adding_build_then_will_reuse_it(self):
+    def test_when_get_build_id_then_will_reuse_it(self):
         with patch.dict(os.environ, {
                 'TCMS_BUILD': 'b.Test',
         }):
@@ -95,7 +95,7 @@ class GivenBuildDoesntExistInDatabase(PluginTestCase):
         cls.plugin._rpc.Build.create = MagicMock(
             return_value={'build_id': 50})
 
-    def test_when_adding_build_then_will_reuse_it(self):
+    def test_when_get_build_id_then_will_add_it(self):
         with patch.dict(os.environ, {
                 'TCMS_BUILD': 'b.Test',
         }):

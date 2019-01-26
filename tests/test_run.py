@@ -48,16 +48,27 @@ class Given_TCMS_RUN_ID_IsNotPresent(PluginTestCase):
             })
 
 
-class TestCaseRunMixin:
-    def test_when_parsing_results_are_updated(self):
-        self.fail('not implemented')
+class GivenEmptyTestRun(PluginTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.plugin._cases_in_test_run = {}
+        cls.plugin._rpc = MagicMock()
+        cls.plugin._rpc.TestRun.add_case = MagicMock()
+
+    def test_when_add_test_case_to_run_then_TestCase_is_added(self):
+        self.plugin.add_test_case_to_run(11, 222)
+        self.plugin._rpc.TestRun.add_case.assert_called_with(222, 11)
 
 
-class GivenEmptyTestRun(PluginTestCase, TestCaseRunMixin):
-    def test_when_parsing_then_TestCase_is_added(self):
-        self.fail('not implemented')
+class GivenTestRunWithTestCases(PluginTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.plugin._cases_in_test_run = {11: 222}
+        cls.plugin._rpc = MagicMock()
+        cls.plugin._rpc.TestRun.add_case = MagicMock()
 
-
-class GivenTestRunWithTestCases(PluginTestCase, TestCaseRunMixin):
-    def test_when_parsing_then_existing_TestCase_is_not_added(self):
-        self.fail('not implemented')
+    def test_when_add_test_case_to_run_then_TestCase_is_not_added(self):
+        self.plugin.add_test_case_to_run(11, 222)
+        self.plugin._rpc.TestRun.add_case.assert_not_called()

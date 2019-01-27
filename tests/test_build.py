@@ -17,7 +17,7 @@ class Given_TCMS_BUILD_IsPresent(PluginTestCase):
                 'TCMS_BUILD': 'b.Test',
                 'TRAVIS_BUILD_NUMBER': 'travis-25',
                 'BUILD_NUMBER': '48',
-        }):
+        }, True):
             build_id, build_number = self.plugin.get_build_id(0, 0)
             self.assertEqual(build_id, 40)
             self.assertEqual(build_number, 'b.Test')
@@ -35,7 +35,7 @@ class Given_TRAVIS_BUILD_NUMBER_IsPresent(PluginTestCase):
         with patch.dict(os.environ, {
                 'TRAVIS_BUILD_NUMBER': 'travis-25',
                 'BUILD_NUMBER': 'jenkins-48',
-        }):
+        }, True):
             build_id, build_number = self.plugin.get_build_id(0, 0)
             self.assertEqual(build_id, 40)
             self.assertEqual(build_number, 'travis-25')
@@ -52,7 +52,7 @@ class Given_BUILD_NUMBER_IsPresent(PluginTestCase):
     def test_when_get_build_id_then_will_use_it(self):
         with patch.dict(os.environ, {
                 'BUILD_NUMBER': 'jenkins-48',
-        }):
+        }, True):
             build_id, build_number = self.plugin.get_build_id(0, 0)
             self.assertEqual(build_id, 40)
             self.assertEqual(build_number, 'jenkins-48')
@@ -79,7 +79,7 @@ class GivenBuildExistsInDatabase(PluginTestCase):
     def test_when_get_build_id_then_will_reuse_it(self):
         with patch.dict(os.environ, {
                 'TCMS_BUILD': 'b.Test',
-        }):
+        }, True):
             build_id, build_number = self.plugin.get_build_id(0, 0)
             self.assertEqual(build_id, 40)
             self.assertEqual(build_number, 'b.Test')
@@ -98,7 +98,7 @@ class GivenBuildDoesntExistInDatabase(PluginTestCase):
     def test_when_get_build_id_then_will_add_it(self):
         with patch.dict(os.environ, {
                 'TCMS_BUILD': 'b.Test',
-        }):
+        }, True):
             build_id, build_number = self.plugin.get_build_id(0, 0)
             self.assertEqual(build_id, 50)
             self.assertEqual(build_number, 'b.Test')

@@ -17,7 +17,7 @@ class Given_TCMS_PRODUCT_VERSION_IsPresent(PluginTestCase):
                 'TRAVIS_COMMIT': 'commit-d86f418',
                 'TRAVIS_PULL_REQUEST_SHA': 'pr-sha-426a95d',
                 'GIT_COMMIT': 'git-d4c2683',
-        }):
+        }, True):
             version_id, version_val = self.plugin.get_version_id(0)
             self.assertEqual(version_id, 4)
             self.assertEqual(version_val, 'v.Test')
@@ -35,7 +35,7 @@ class Given_TRAVIS_COMMIT_IsPresent(PluginTestCase):
                 'TRAVIS_COMMIT': 'commit-d86f418',
                 'TRAVIS_PULL_REQUEST_SHA': 'pr-sha-426a95d',
                 'GIT_COMMIT': 'git-d4c2683',
-        }):
+        }, True):
             version_id, version_val = self.plugin.get_version_id(0)
             self.assertEqual(version_id, 4)
             self.assertEqual(version_val, 'commit-d86f418')
@@ -52,7 +52,7 @@ class Given_TRAVIS_PULL_REQUEST_SHA_IsPresent(PluginTestCase):
         with patch.dict(os.environ, {
                 'TRAVIS_PULL_REQUEST_SHA': 'pr-sha-426a95d',
                 'GIT_COMMIT': 'git-d4c2683',
-        }):
+        }, True):
             version_id, version_val = self.plugin.get_version_id(0)
             self.assertEqual(version_id, 4)
             self.assertEqual(version_val, 'pr-sha-426a95d')
@@ -68,7 +68,7 @@ class Given_GIT_COMMIT_IsPresent(PluginTestCase):
     def test_when_get_version_id_then_will_use_it(self):
         with patch.dict(os.environ, {
                 'GIT_COMMIT': 'git-d4c2683',
-        }):
+        }, True):
             version_id, version_val = self.plugin.get_version_id(0)
             self.assertEqual(version_id, 4)
             self.assertEqual(version_val, 'git-d4c2683')
@@ -93,7 +93,7 @@ class GivenVersionExistsInDatabase(PluginTestCase):
     def test_when_get_version_id_then_will_reuse_it(self):
         with patch.dict(os.environ, {
                 'TCMS_PRODUCT_VERSION': 'v.Test',
-        }):
+        }, True):
             version_id, version_val = self.plugin.get_version_id(0)
             self.assertEqual(version_id, 4)
             self.assertEqual(version_val, 'v.Test')
@@ -111,7 +111,7 @@ class GivenVersionDoesntExistInDatabase(PluginTestCase):
     def test_when_get_version_id_then_will_add_it(self):
         with patch.dict(os.environ, {
                 'TCMS_PRODUCT_VERSION': 'v.Test',
-        }):
+        }, True):
             version_id, version_val = self.plugin.get_version_id(0)
             self.assertEqual(version_id, 5)
             self.assertEqual(version_val, 'v.Test')

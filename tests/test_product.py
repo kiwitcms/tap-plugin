@@ -17,7 +17,7 @@ class Given_TCMS_PRODUCT_IsPresent(PluginTestCase):
                 'TCMS_PRODUCT': 'p.Test',
                 'TRAVIS_REPO_SLUG': 'kiwitcms/tap-plugin',
                 'JOB_NAME': 'TAP Plugin',
-        }):
+        }, True):
             product_id, product_name = self.plugin.get_product_id(0)
             self.assertEqual(product_id, 44)
             self.assertEqual(product_name, 'p.Test')
@@ -35,7 +35,7 @@ class Given_TRAVIS_REPO_SLUG_IsPresent(PluginTestCase):
         with patch.dict(os.environ, {
                 'TRAVIS_REPO_SLUG': 'kiwitcms/tap-plugin',
                 'JOB_NAME': 'TAP Plugin',
-        }):
+        }, True):
             product_id, product_name = self.plugin.get_product_id(0)
             self.assertEqual(product_id, 44)
             self.assertEqual(product_name, 'kiwitcms/tap-plugin')
@@ -52,7 +52,7 @@ class Given_JOB_NAME_IsPresent(PluginTestCase):
     def test_when_adding_product_then_will_use_it(self):
         with patch.dict(os.environ, {
                 'JOB_NAME': 'TAP Plugin',
-        }):
+        }, True):
             product_id, product_name = self.plugin.get_product_id(0)
             self.assertEqual(product_id, 44)
             self.assertEqual(product_name, 'TAP Plugin')
@@ -102,7 +102,7 @@ class GivenProductExistsInDatabase(PluginTestCase):
     def test_when_adding_product_then_will_reuse_it(self):
         with patch.dict(os.environ, {
                 'TCMS_PRODUCT': 'p.Test',
-        }):
+        }, True):
             product_id, product_name = self.plugin.get_product_id(0)
             self.assertEqual(product_id, 44)
             self.assertEqual(product_name, 'p.Test')
@@ -123,7 +123,7 @@ class GivenProductDoesntExistInDatabase(PluginTestCase):
     def test_when_adding_product_then_will_add_it(self):
         with patch.dict(os.environ, {
                 'TCMS_PRODUCT': 'p.Test',
-        }):
+        }, True):
             product_id, product_name = self.plugin.get_product_id(0)
             self.assertEqual(product_id, 55)
             self.assertEqual(product_name, 'p.Test')

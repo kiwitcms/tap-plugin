@@ -15,7 +15,7 @@ class Given_TCMS_RUN_ID_IsPresent(PluginTestCase):
     def test_when_get_run_id_then_will_use_it(self):
         with patch.dict(os.environ, {
                 'TCMS_RUN_ID': '532',
-        }):
+        }, True):
             run_id = self.plugin.get_run_id()
             self.assertEqual(run_id, 532)
             self.plugin._rpc.TestRun.create.assert_not_called()

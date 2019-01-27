@@ -20,5 +20,10 @@ tap:
 	./tests/bin/make-tap
 
 
+.PHONY: check-build
+check-build:
+	./tests/bin/check-build
+
+
 .PHONY: ci
 ci: flake8 pylint test

@@ -5,6 +5,7 @@ python:
   - 3.6
 env:
   - MAKE=ci
+  - MAKE=check-build
   - MAKE=tap
 install:
   - pip install -r devel.txt

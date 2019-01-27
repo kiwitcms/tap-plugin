@@ -122,9 +122,9 @@ class Plugin:
         result = self._rpc.TestRun.filter({'pk': run_id})
         if not result:
             product_id, product_name = self.get_product_id(0)
-            version_id, _ = self.get_version_id(product_id)
+            version_id, version_name = self.get_version_id(product_id)
 
-            name = '[TAP] Plan for %s' % product_name
+            name = '[TAP] Plan for %s (%s)' % (product_name, version_name)
 
             result = self._rpc.TestPlan.filter({'name': name,
                                                 'product': product_id,

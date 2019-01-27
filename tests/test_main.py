@@ -2,12 +2,12 @@
 
 import unittest
 from unittest.mock import patch
-from tap_plugin import main
+from tcms_tap_plugin import main
 
 
 class MainFuncTestCase(unittest.TestCase):
     def test_when_calling_main_with_arguments_then_parse(self):
-        with patch('tap_plugin.Plugin.parse') as parse:
+        with patch('tcms_tap_plugin.Plugin.parse') as parse:
             main([__file__, 'output.tap'])
             parse.assert_called_with('output.tap')
 

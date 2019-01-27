@@ -12,8 +12,8 @@ REQUIREMENTS = open('requirements.txt').readlines()
 
 setup(name='kiwitcms-tap-plugin',
       version='0.0',
-      packages=['tap_plugin'],
-      scripts=['tap-plugin'],
+      packages=['tcms_tap_plugin'],
+      scripts=['tcms-tap-plugin'],
       description='Test Anything Protocol (TAP) plugin for '
                   'Kiwi TCMS test case management system',
       long_description=LONG_DESCRIPTION,
@@ -23,7 +23,7 @@ setup(name='kiwitcms-tap-plugin',
       url='https://github.com/kiwitcms/tap-plugin',
       install_requires=REQUIREMENTS,
       classifiers=[
-          'Development Status :: 5 - Production/Stable',
+          'Development Status :: 4 - Beta',
           'Environment :: Console',
           'Intended Audience :: Developers',
           'Intended Audience :: System Administrators',

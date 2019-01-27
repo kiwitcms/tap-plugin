@@ -6,6 +6,6 @@
 
 if __name__ == "__main__":
     import sys
-    from tap_plugin import main
+    from tcms_tap_plugin import main
 
     main(sys.argv)

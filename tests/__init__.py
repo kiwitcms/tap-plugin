@@ -1,5 +1,5 @@
 import unittest
-from tap_plugin import Plugin
+from tcms_tap_plugin import Plugin
 
 
 class PluginTestCase(unittest.TestCase):

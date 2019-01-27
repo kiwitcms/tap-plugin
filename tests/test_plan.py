@@ -47,7 +47,7 @@ class GivenRunDoesntExistInDatabase(PluginTestCase):
         plan_id = self.plugin.get_plan_id(0)
         self.assertEqual(plan_id, 500)
         self.plugin._rpc.TestPlan.create.assert_called_with({
-            'name': '[TAP] Plan for p.Four',
+            'name': '[TAP] Plan for p.Four (v.Test)',
             'text': 'Created by Kiwi TCMS tap-plugin',
             'product': 4,
             'product_version': 44,

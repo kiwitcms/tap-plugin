@@ -1,3 +1,4 @@
+sudo: required
 language: python
 cache: pip
 python:
@@ -10,6 +11,9 @@ install:
         echo "url = https://tcms.kiwitcms.org/xml-rpc/" >> ~/.tcms.conf
         echo "username = kiwitcms-bot" >> ~/.tcms.conf
         echo "password = $TCMS_PASSWORD" >> ~/.tcms.conf
+
+        sudo cp .ssl/*.pem /usr/lib/ssl/certs/
+        sudo update-ca-certificates --fresh
 
 script:
   - make ci

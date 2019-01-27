@@ -38,7 +38,7 @@ class Given_TCMS_RUN_ID_IsNotPresent(PluginTestCase):
             return_value=[{'case_id': 1111, 'case_run_id': 2222}])
 
     def test_when_get_run_id_then_will_create_TestRun(self):
-        with patch.dict(os.environ, {}):
+        with patch.dict(os.environ, {}, True):
             run_id = self.plugin.get_run_id()
             self.assertEqual(run_id, 99)
             self.plugin._rpc.TestRun.create.assert_called_with({

@@ -76,7 +76,7 @@ class Given_GIT_COMMIT_IsPresent(PluginTestCase):
 
 class GivenVersionEnvironmentIsNotPresent(PluginTestCase):
     def test_when_get_version_id_then_will_raise(self):
-        with patch.dict(os.environ, {}):
+        with patch.dict(os.environ, {}, True):
             with self.assertRaisesRegex(Exception,
                                         'Version value not defined'):
                 self.plugin.get_version_id(0)

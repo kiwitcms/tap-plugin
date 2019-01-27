@@ -66,7 +66,7 @@ class GivenProductEnvironmentIsNotPresent(PluginTestCase):
         cls.plugin._rpc.TestPlan.filter = MagicMock(return_value=[])
 
     def test_when_adding_product_then_will_raise(self):
-        with patch.dict(os.environ, {}):
+        with patch.dict(os.environ, {}, True):
             with self.assertRaisesRegex(Exception,
                                         'Product name not defined'):
                 self.plugin.get_product_id(0)

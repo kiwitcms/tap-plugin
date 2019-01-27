@@ -60,7 +60,7 @@ class Given_BUILD_NUMBER_IsPresent(PluginTestCase):
 
 class GivenBuildEnvironmentIsNotPresent(PluginTestCase):
     def test_when_get_build_id_then_will_raise(self):
-        with patch.dict(os.environ, {}):
+        with patch.dict(os.environ, {}, True):
             with self.assertRaisesRegex(Exception,
                                         'Build number not defined'):
                 self.plugin.get_build_id(0, 0)

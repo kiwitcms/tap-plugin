@@ -21,7 +21,7 @@ set +e
 
 # check rst formatting of README before building the package
 echo "..... Check rst formatting for PyPI"
-twine check dist/*
+twine check dist/* || exit 1
 
 # then run some sanity tests
 echo "..... Searching for .pyc files inside the built packages"

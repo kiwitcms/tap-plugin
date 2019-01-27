@@ -3,6 +3,9 @@ language: python
 cache: pip
 python:
   - 3.6
+env:
+  - CMD=ci
+  - CMD=tap
 install:
   - pip install nose nose-tap coverage flake8 pylint
   - pip install -r requirements.txt
@@ -16,7 +19,8 @@ install:
         sudo update-ca-certificates --fresh
 
 script:
-  - make ci
+  - make $CMD
+
 after_success:
   - |
         pip install coveralls

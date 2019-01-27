@@ -12,7 +12,13 @@ pylint:
 
 .PHONY: test
 test:
-	nosetests --with-coverage --cover-erase --cover-package=tcms_tap_plugin --with-tap --tap-stream
+	nosetests -v --with-coverage --cover-erase --cover-package=tcms_tap_plugin
+
+
+.PHONY: tap
+tap:
+	nosetests --with-tap --tap-stream 2> output.tap
+	./tcms-tap-plugin output.tap
 
 
 .PHONY: ci

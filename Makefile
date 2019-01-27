@@ -17,7 +17,7 @@ test:
 
 .PHONY: tap
 tap:
-	nosetests --with-tap --tap-stream 2> output.tap
+	nosetests --with-tap --tap-stream 2> output.tap || echo
 	./tcms-tap-plugin output.tap
 
 

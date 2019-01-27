@@ -6,3 +6,4 @@ coverage
 flake8
 pylint
 twine
+readme_render[md]

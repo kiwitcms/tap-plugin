@@ -7,8 +7,7 @@ env:
   - MAKE=ci
   - MAKE=tap
 install:
-  - pip install nose nose-tap coverage flake8 pylint
-  - pip install -r requirements.txt
+  - pip install -r devel.txt
   - |
         echo "[tcms]" > ~/.tcms.conf
         echo "url = https://tcms.kiwitcms.org/xml-rpc/" >> ~/.tcms.conf

@@ -1,0 +1,8 @@
+-r requirements.txt
+
+nose
+nose-tap
+coverage
+flake8
+pylint
+twine

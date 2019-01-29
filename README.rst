@@ -28,6 +28,8 @@ send the results to `Kiwi TCMS <http://kiwitcms.org>`_.
 Installation
 ------------
 
+::
+
     pip install kiwitcms-tap-plugin
 
 
@@ -76,6 +78,8 @@ for Travis CI and Jenkins and allows endless configuration via environment varia
 
 Usage
 -----
+
+::
 
     # define environment variables
     tcms-tap-plugin /path/to/results.tap

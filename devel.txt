@@ -6,4 +6,5 @@ coverage
 flake8
 pylint
 twine
+pyOpenSSL
 readme_renderer[md]

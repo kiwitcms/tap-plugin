@@ -17,7 +17,7 @@ Test Anything Protocol (TAP) plugin for Kiwi TCMS
     :target: https://pyup.io/repos/github/kiwitcms/tap-plugin/
     :alt: Python updates
 
-.. image:: https://raw.githubusercontent.com/kiwitcms/Kiwi/master/tcms/static/images/badge.svg?sanitize=true
+.. image:: https://img.shields.io/badge/kiwi%20tcms-results-9ab451.svg
     :target: https://tcms.kiwitcms.org/plan/14/
     :alt: TP for kiwitcms/tap-plugin (master)
 

@@ -9,7 +9,7 @@ from tcms_api.plugin_helpers import Backend
 
 class Plugin:  # pylint: disable=too-few-public-methods
     def __init__(self):
-        self.backend = Backend()
+        self.backend = Backend(prefix='[TAP] ')
 
     def parse(self, tap_file, progress_cb=None):
         self.backend.configure()

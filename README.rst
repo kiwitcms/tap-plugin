@@ -22,7 +22,7 @@ Test Anything Protocol (TAP) plugin for Kiwi TCMS
    :alt: Become a sponsor
 
 .. image:: https://img.shields.io/badge/kiwi%20tcms-results-9ab451.svg
-    :target: https://tcms.kiwitcms.org/plan/14/
+    :target: https://tcms.kiwitcms.org/plan/6/
     :alt: TP for kiwitcms/tap-plugin (master)
 
 This package allows you to read Test Anything Protocol (TAP) files and
@@ -74,7 +74,7 @@ Further documentation and behavior specification can be found
 `here <https://kiwitcms.readthedocs.io/en/latest/modules/tcms_api.tcms_api.plugin_helpers.html>`_.
 
 The above configuration creates a separate TestPlan for each branch, see
-`TP-14: [TAP] Plan for kiwitcms/tap-plugin (master) <https://tcms.kiwitcms.org/plan/14/>`_,
+`TP-6: [TAP] Plan for kiwitcms/tap-plugin (master) <https://tcms.kiwitcms.org/plan/6/>`_,
 a separate TestPlan for each pull request (recording possible multiple test runs) and
 separate TestPlan and TestRun for each tag on GitHub! `tcms-api` has default behavior
 for Travis CI and Jenkins and allows endless configuration via environment variables.

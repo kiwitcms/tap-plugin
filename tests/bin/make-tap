@@ -15,6 +15,5 @@ fi
 
 export TCMS_BUILD="$TRAVIS_BUILD_NUMBER-$(echo $TRAVIS_COMMIT | cut -c1-7)"
 
-
 nosetests --with-tap --tap-stream 2> output.tap
 ./tcms-tap-plugin output.tap

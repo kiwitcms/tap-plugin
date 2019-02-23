@@ -15,3 +15,14 @@ class MainFuncTestCase(unittest.TestCase):
         with self.assertRaisesRegex(Exception,
                                     'USAGE: %s results.tap' % __file__):
             main([__file__])
+
+    @unittest.expectedFailure
+    def test_produce_traceback_output(self):
+        """Add traceback on TAP ouput"""
+        main([__file__])
+
+    def test_parse_file_with_traceback(self):
+        """Parse file with traceback"""
+        with patch('tcms_tap_plugin.Plugin.parse') as parse:
+            main([__file__, 'traceback.taptest'])
+            parse.assert_called_with('traceback.taptest')

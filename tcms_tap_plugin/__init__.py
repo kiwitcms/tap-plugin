@@ -2,7 +2,7 @@
 
 # Licensed under the GPLv3: https://www.gnu.org/licenses/gpl.html
 
-from tap.line import Result
+from tap.line import Result, Diagnostic
 from tap.parser import Parser
 from tcms_api.plugin_helpers import Backend
 
@@ -14,8 +14,20 @@ class Plugin:  # pylint: disable=too-few-public-methods
     def parse(self, tap_file, progress_cb=None):
         self.backend.configure()
 
+        test_execution_id = None
+        trace_back = []
         for line in Parser().parse_file(tap_file):
-            if not isinstance(line, Result):
+            if isinstance(line, Result):
+                # before parsing the 'next' result line add
+                # traceback as comment to the previous TE
+                if test_execution_id and trace_back:
+                    self.backend.add_comment(test_execution_id,
+                                             "\n" + "\n".join(trace_back))
+                trace_back = []
+            elif isinstance(line, Diagnostic):
+                trace_back.append(line.text[2:])
+                continue
+            else:
                 continue
 
             test_case = self.backend.test_case_get_or_create(line.description)

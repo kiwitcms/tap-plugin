@@ -15,3 +15,7 @@ class MainFuncTestCase(unittest.TestCase):
         with self.assertRaisesRegex(Exception,
                                     'USAGE: %s results.tap' % __file__):
             main([__file__])
+
+    @unittest.expectedFailure
+    def test_expected_traceback_for_te_comment(self):
+        raise Exception('This is expected')

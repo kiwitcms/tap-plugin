@@ -12,6 +12,7 @@ REQUIREMENTS = open('requirements.txt').readlines()
 
 def local_scheme(version):
     """
+    Remove date part from local version
     """
     from setuptools_scm.version import get_local_node_and_date
     version = get_local_node_and_date(version)

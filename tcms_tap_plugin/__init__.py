@@ -6,6 +6,13 @@ from tap.line import Result
 from tap.parser import Parser
 from tcms_api.plugin_helpers import Backend
 
+from pkg_resources import get_distribution, DistributionNotFound
+try:
+    __version__ = get_distribution(__name__).version
+except DistributionNotFound:
+    # package is not installed
+    pass
+
 
 class Plugin:  # pylint: disable=too-few-public-methods
     def __init__(self):

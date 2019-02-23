@@ -8,3 +8,4 @@ pylint
 twine
 pyOpenSSL
 readme_renderer[md]
+setuptools-scm==3.2.0

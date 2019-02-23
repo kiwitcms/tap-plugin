@@ -10,8 +10,20 @@ with open('README.rst') as readme:
 REQUIREMENTS = open('requirements.txt').readlines()
 
 
+def local_scheme(version):
+    """
+    """
+    from setuptools_scm.version import get_local_node_and_date
+    version = get_local_node_and_date(version)
+    return '.'.join(version.split('.')[:1])
+
+
 setup(name='kiwitcms-tap-plugin',
-      version='0.2',
+      use_scm_version={
+          'write_to': 'tcms_tap_plugin/_version.py',
+          'local_scheme': local_scheme,
+      },
+      setup_requires=['setuptools_scm'],
       packages=['tcms_tap_plugin'],
       scripts=['tcms-tap-plugin'],
       description='Test Anything Protocol (TAP) plugin for '

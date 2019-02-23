@@ -1,0 +1,15 @@
+# Résultats TAP pour MainFuncTestCase
+not ok 1 Add traceback on TAP ouput
+# Traceback (most recent call last):
+#   File "/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/case.py", line 59, in testPartExecutor
+#     yield
+#   File "/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/case.py", line 605, in run
+#     testMethod()
+#   File "/Users/mgacchau/Documents/Source/Github/kryskool/tap-plugin/tests/test_main.py", line 21, in test_produce_traceback_output
+#     main([__file__])
+#   File "/Users/mgacchau/Documents/Source/Github/kryskool/tap-plugin/tcms_tap_plugin/__init__.py", line 70, in main
+#     raise Exception("USAGE: %s results.tap" % argv[0])
+# Exception: USAGE: /Users/mgacchau/Documents/Source/Github/kryskool/tap-plugin/tests/test_main.py results.tap
+ok 2 test_when_calling_main_with_arguments_then_parse (tests.test_main.MainFuncTestCase)
+ok 3 test_when_calling_main_without_arguments_then_usage (tests.test_main.MainFuncTestCase)
+1..3

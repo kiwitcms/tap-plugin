@@ -48,8 +48,7 @@ Minimal config file `~/.tcms.conf`::
     password = your-password
 
 
-For more info see
-`tcms-api docs <https://kiwitcms.readthedocs.io/en/latest/modules/tcms_api.tcms_api.html>`_.
+For more info see `tcms-api docs <https://tcms-api.readthedocs.io>`_.
 
 This plugin is only concerned with parsing the TAP format and executing
 `tcms-api` functions which will create/reuse test cases, test plans and test runs.
@@ -71,7 +70,7 @@ For example this is how our own environment looks like::
     export TCMS_BUILD="$TRAVIS_BUILD_NUMBER-$(echo $TRAVIS_COMMIT | cut -c1-7)"
 
 Further documentation and behavior specification can be found
-`here <https://kiwitcms.readthedocs.io/en/latest/modules/tcms_api.tcms_api.plugin_helpers.html>`_.
+`here <https://tcms-api.readthedocs.io/en/latest/modules/tcms_api.plugin_helpers.html>`_.
 
 The above configuration creates a separate TestPlan for each branch, see
 `TP-6: [TAP] Plan for kiwitcms/tap-plugin (master) <https://tcms.kiwitcms.org/plan/6/>`_,

@@ -78,14 +78,6 @@ a separate TestPlan for each pull request (recording possible multiple test runs
 separate TestPlan and TestRun for each tag on GitHub! `tcms-api` has default behavior
 for Travis CI and Jenkins and allows endless configuration via environment variables.
 
-Changelog
----------
-
-v0.3 (10 April 2019)
-~~~~~~~~~~~~~~~~~~~~
-
-- Works with Kiwi TCMS v6.7 or newer
-- Uses new names of API methods
 
 Usage
 -----
@@ -94,3 +86,13 @@ Usage
 
     # define environment variables
     tcms-tap-plugin /path/to/results.tap
+
+
+Changelog
+---------
+
+v0.3 (10 April 2019)
+~~~~~~~~~~~~~~~~~~~~
+
+- Works with Kiwi TCMS v6.7 or newer
+- Uses new names of API methods

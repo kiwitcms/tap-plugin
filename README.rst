@@ -91,6 +91,15 @@ Usage
 Changelog
 ---------
 
+
+v0.4 (23 September 2019)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Include traceback from TAP file as TE comment. Fixes
+  `Issue #7 <https://github.com/kiwitcms/tap-plugin/issues/7>`_
+  (Christophe CHAUVET)
+
+
 v0.3 (10 April 2019)
 ~~~~~~~~~~~~~~~~~~~~
 

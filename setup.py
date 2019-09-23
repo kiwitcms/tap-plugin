@@ -11,7 +11,7 @@ REQUIREMENTS = open('requirements.txt').readlines()
 
 
 setup(name='kiwitcms-tap-plugin',
-      version='0.3',
+      version='0.4',
       packages=['tcms_tap_plugin'],
       scripts=['tcms-tap-plugin'],
       description='Test Anything Protocol (TAP) plugin for '

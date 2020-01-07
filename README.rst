@@ -17,13 +17,21 @@ Test Anything Protocol (TAP) plugin for Kiwi TCMS
     :target: https://pyup.io/repos/github/kiwitcms/tap-plugin/
     :alt: Python updates
 
+.. image:: https://img.shields.io/badge/kiwi%20tcms-results-9ab451.svg
+    :target: https://tcms.kiwitcms.org/plan/6/
+    :alt: TP for kiwitcms/tap-plugin (master)
+
+.. image:: https://tidelift.com/badges/package/pypi/kiwitcms
+    :target: https://tidelift.com/subscription/pkg/pypi-kiwitcms?utm_source=pypi-kiwitcms&utm_medium=github&utm_campaign=readme
+    :alt: Tidelift
+
 .. image:: https://opencollective.com/kiwitcms/tiers/sponsor/badge.svg?label=sponsors&color=brightgreen
    :target: https://opencollective.com/kiwitcms#contributors
    :alt: Become a sponsor
 
-.. image:: https://img.shields.io/badge/kiwi%20tcms-results-9ab451.svg
-    :target: https://tcms.kiwitcms.org/plan/6/
-    :alt: TP for kiwitcms/tap-plugin (master)
+.. image:: https://img.shields.io/twitter/follow/KiwiTCMS.svg
+    :target: https://twitter.com/KiwiTCMS
+    :alt: Kiwi TCMS on Twitter
 
 This package allows you to read Test Anything Protocol (TAP) files and
 send the results to `Kiwi TCMS <http://kiwitcms.org>`_.

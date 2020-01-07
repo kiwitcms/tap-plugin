@@ -22,7 +22,7 @@ Test Anything Protocol (TAP) plugin for Kiwi TCMS
     :alt: TP for kiwitcms/tap-plugin (master)
 
 .. image:: https://tidelift.com/badges/package/pypi/kiwitcms-tap-plugin
-    :target: https://tidelift.com/subscription/pkg/pypi-kiwitcms-tap-plugin?utm_source=pypi-kiwitcms&utm_medium=github&utm_campaign=readme
+    :target: https://tidelift.com/subscription/pkg/pypi-kiwitcms-tap-plugin?utm_source=pypi-kiwitcms-tap-plugin&utm_medium=github&utm_campaign=readme
     :alt: Tidelift
 
 .. image:: https://opencollective.com/kiwitcms/tiers/sponsor/badge.svg?label=sponsors&color=brightgreen

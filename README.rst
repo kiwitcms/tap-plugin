@@ -99,6 +99,11 @@ Usage
 Changelog
 ---------
 
+v0.5 (07 January 2020)
+~~~~~~~~~~~~~~~~~~~~~
+
+- Update ``tap.py`` dependency from 2.6.1 to 2.6.2
+
 
 v0.4 (23 September 2019)
 ~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,2 +1,2 @@
-tap.py==2.6.2
+tap.py==3.0
 tcms-api==6.7.1

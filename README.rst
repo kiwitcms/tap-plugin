@@ -99,6 +99,16 @@ Usage
 Changelog
 ---------
 
+v8.0 (09 February 2020)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+This version works only with Kiwi TCMS v8.0 or later!
+
+- Adjust plugin due to API changes in Kiwi TCMS v8.0
+- Update ``tap.py`` from 2.6.2 to 3.0
+- Require ``tcms-api>=8.0``
+
+
 v0.5 (07 January 2020)
 ~~~~~~~~~~~~~~~~~~~~~~
 

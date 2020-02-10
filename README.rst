@@ -99,6 +99,14 @@ Usage
 Changelog
 ---------
 
+v8.0.1 (10 February 2020)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This version works only with Kiwi TCMS v8.0 or later!
+
+- Update to tcms-api==8.0.1
+
+
 v8.0 (09 February 2020)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

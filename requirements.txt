@@ -1,2 +1,2 @@
 tap.py==3.0
-tcms-api>=8.0
+tcms-api==8.0.1

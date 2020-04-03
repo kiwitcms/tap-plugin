@@ -99,6 +99,18 @@ Usage
 Changelog
 ---------
 
+v8.2 (03 Apr 2020)
+~~~~~~~~~~~~~~~~~~
+
+This version works only with Kiwi TCMS v8.2 or later!
+
+- Update to tcms-api==8.2.0
+- Patch for changed return value in
+  ``plugin_helpers.Backend.test_case_get_or_create()``
+- Call ``plugin_helpers.backend.finish_test_run()`` when done. Fixes
+  `Issue #9 <https://github.com/kiwitcms/tap-plugin/issues/9>`_
+
+
 v8.0.1 (10 February 2020)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

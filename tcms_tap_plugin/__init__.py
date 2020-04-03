@@ -61,6 +61,8 @@ class Plugin:  # pylint: disable=too-few-public-methods
             if progress_cb:
                 progress_cb()
 
+        self.backend.finish_test_run()
+
 
 def main(argv):
     if len(argv) < 2:

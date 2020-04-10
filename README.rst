@@ -99,6 +99,15 @@ Usage
 Changelog
 ---------
 
+v8.3 (10 Apr 2020)
+~~~~~~~~~~~~~~~~~~
+
+- Update to
+  `tcms-api v8.3.0 <https://github.com/kiwitcms/tcms-api/#v830-10-april-2020>`_
+  which uses ``gssapi`` for Kerberos
+- Requires MIT Kerberos for Windows if installed on Windows
+
+
 v8.2 (03 Apr 2020)
 ~~~~~~~~~~~~~~~~~~
 

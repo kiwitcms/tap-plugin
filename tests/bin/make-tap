@@ -2,20 +2,6 @@
 
 # Execute this from the project root directory
 
-[ -z "$TRAVIS" ] && exit
-
-if [ "$TRAVIS_EVENT_TYPE" == "push" ]; then
-    # same as $TRAVIS_TAG when building tags
-    export TCMS_PRODUCT_VERSION=$TRAVIS_BRANCH
-fi
-
-if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ]; then
-    export TCMS_PRODUCT_VERSION="PR-$TRAVIS_PULL_REQUEST"
-fi
-
-export TCMS_BUILD="$TRAVIS_BUILD_NUMBER-$(echo $TRAVIS_COMMIT | cut -c1-7)"
-
-
 nosetests --with-tap --tap-stream 2> output.tap
 ./tcms-tap-plugin output.tap
 

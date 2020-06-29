@@ -6,18 +6,8 @@ python:
 env:
   - MAKE=ci
   - MAKE=check-build
-  - MAKE=tap
 install:
   - pip install -r devel.txt
-  - |
-        echo "[tcms]" > ~/.tcms.conf
-        echo "url = https://tcms.kiwitcms.org/xml-rpc/" >> ~/.tcms.conf
-        echo "username = kiwitcms-bot" >> ~/.tcms.conf
-        echo "password = $TCMS_PASSWORD" >> ~/.tcms.conf
-
-        sudo cp .ssl/*.pem /usr/lib/ssl/certs/
-        sudo update-ca-certificates --fresh
-
 script:
   - make $MAKE
 

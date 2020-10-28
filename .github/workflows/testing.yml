@@ -27,7 +27,6 @@ jobs:
 
     - name: Install Python dependencies
       run: |
-        sudo apt-get install libkrb5-dev
         pip install -r devel.txt
 
     - name: Prepare ~/.tcms.conf

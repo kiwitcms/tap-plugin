@@ -99,6 +99,13 @@ Usage
 Changelog
 ---------
 
+v10.0 (02 Mar 2021)
+~~~~~~~~~~~~~~~~~~~
+
+- Compatible with Kiwi TCMS v10.0
+- Update tcms-api to 10.0
+
+
 v9.0 (13 Jan 2021)
 ~~~~~~~~~~~~~~~~~~
 

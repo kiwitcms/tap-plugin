@@ -67,7 +67,8 @@ class Plugin:  # pylint: disable=too-few-public-methods
 
 def main(argv):
     if len(argv) < 2:
-        raise Exception("USAGE: %s results.tap" % argv[0])
+        program_name = argv[0]
+        raise Exception(f"USAGE: {program_name} results.tap")
 
     plugin = Plugin()
     plugin.parse(argv[1])

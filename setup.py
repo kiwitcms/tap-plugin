@@ -3,11 +3,12 @@
 from setuptools import setup
 
 
-with open('README.rst') as readme:
+with open('README.rst', encoding="utf-8") as readme:
     LONG_DESCRIPTION = readme.read()
 
 
-REQUIREMENTS = open('requirements.txt').readlines()
+with open('requirements.txt', encoding="utf-8") as requirements:
+    REQUIREMENTS = requirements.readlines()
 
 
 setup(name='kiwitcms-tap-plugin',

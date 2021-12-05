@@ -1,4 +1,4 @@
-# Copyright (c) 2019 Alexander Todorov <atodorov@MrSenko.com>
+# Copyright (c) 2019-2021 Alexander Todorov <atodorov@MrSenko.com>
 
 # Licensed under the GPLv3: https://www.gnu.org/licenses/gpl.html
 
@@ -9,7 +9,7 @@ from tcms_api.plugin_helpers import Backend
 
 class Plugin:  # pylint: disable=too-few-public-methods
     def __init__(self):
-        self.backend = Backend(prefix='[TAP] ')
+        self.backend = Backend(prefix='[TAP]')
 
     def parse(self, tap_file, progress_cb=None):
         self.backend.configure()

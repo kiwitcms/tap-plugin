@@ -12,7 +12,7 @@ with open('requirements.txt', encoding="utf-8") as requirements:
 
 
 setup(name='kiwitcms-tap-plugin',
-      version='10.0',
+      version='11.0',
       packages=['tcms_tap_plugin'],
       scripts=['tcms-tap-plugin'],
       description='Test Anything Protocol (TAP) plugin for '

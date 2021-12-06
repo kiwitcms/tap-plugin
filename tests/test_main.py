@@ -13,7 +13,7 @@ class MainFuncTestCase(unittest.TestCase):
 
     def test_when_calling_main_without_arguments_then_usage(self):
         with self.assertRaisesRegex(Exception,
-                                    'USAGE: %s results.tap' % __file__):
+                                    f'USAGE: {__file__} results.tap'):
             main([__file__])
 
     @unittest.expectedFailure

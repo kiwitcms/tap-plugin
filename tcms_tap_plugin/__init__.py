@@ -21,8 +21,10 @@ class Plugin:  # pylint: disable=too-few-public-methods
                 # before parsing the 'next' result line add
                 # traceback as comment to the previous TE
                 if test_execution_id and trace_back:
-                    self.backend.add_comment(test_execution_id,
-                                             "\n" + "\n".join(trace_back))
+                    self.backend.add_comment(
+                        test_execution_id,
+                        "<pre>\n" + "\n".join(trace_back) + "</pre>"
+                    )
                 trace_back = []
             elif isinstance(line, Diagnostic):
                 trace_back.append(line.text[2:])
@@ -55,6 +57,7 @@ class Plugin:  # pylint: disable=too-few-public-methods
                 test_case_id,
                 self.backend.run_id,
             ):
+                test_execution_id = execution["id"]
                 self.backend.update_test_execution(execution["id"],
                                                    status_id,
                                                    comment)

@@ -65,16 +65,16 @@ This plugin is only concerned with parsing the TAP format and executing
 For example this is how our own environment looks like::
 
     #!/bin/bash
-    
+
     if [ "$TRAVIS_EVENT_TYPE" == "push" ]; then
         # same as $TRAVIS_TAG when building tags
         export TCMS_PRODUCT_VERSION=$TRAVIS_BRANCH
     fi
-    
+
     if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ]; then
         export TCMS_PRODUCT_VERSION="PR-$TRAVIS_PULL_REQUEST"
     fi
-    
+
     export TCMS_BUILD="$TRAVIS_BUILD_NUMBER-$(echo $TRAVIS_COMMIT | cut -c1-7)"
 
 Further documentation and behavior specification can be found

@@ -99,6 +99,16 @@ Usage
 Changelog
 ---------
 
+v11.2 (15 May 2022)
+~~~~~~~~~~~~~~~~~~~
+
+- Update tap.py from 3.0 to 3.1
+- Update tcms-api from 11.0 to 11.2. Closes
+  `Issue #5 <https://github.com/kiwitcms/tap-plugin/issues/5>`_ and
+  `Issue #13 <https://github.com/kiwitcms/tap-plugin/issues/13>`_
+- Fix bug with traceback not being posted as comment.
+  `Issue #48 <https://github.com/kiwitcms/tap-plugin/issues/48>`_
+
 v11.0 (05 Dec 2021)
 ~~~~~~~~~~~~~~~~~~~
 

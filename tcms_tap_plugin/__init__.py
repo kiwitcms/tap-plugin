@@ -1,6 +1,7 @@
 # Copyright (c) 2019-2022 Alexander Todorov <atodorov@MrSenko.com>
 
 # Licensed under the GPLv3: https://www.gnu.org/licenses/gpl.html
+import argparse
 
 from tap.line import Result, Diagnostic
 from tap.parser import Parser
@@ -15,8 +16,8 @@ class Backend(plugin_helpers.Backend):
 
 
 class Plugin:  # pylint: disable=too-few-public-methods
-    def __init__(self):
-        self.backend = Backend(prefix='[TAP]')
+    def __init__(self, verbose=False):
+        self.backend = Backend(prefix='[TAP]', verbose=verbose)
 
     def parse(self, tap_file, progress_cb=None):
         self.backend.configure()
@@ -76,9 +77,14 @@ class Plugin:  # pylint: disable=too-few-public-methods
 
 
 def main(argv):
-    if len(argv) < 2:
-        program_name = argv[0]
-        raise Exception(f"USAGE: {program_name} results.tap")
+    parser = argparse.ArgumentParser(
+        description='Parse the specified TAP files and '
+                    'send the results to Kiwi TCMS'
+    )
+    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
+                        help='Print information about created TP/TR records')
 
-    plugin = Plugin()
+    args = parser.parse_args(argv)
+
+    plugin = Plugin(verbose=args.verbose)
     plugin.parse(argv[1])

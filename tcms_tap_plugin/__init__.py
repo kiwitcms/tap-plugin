@@ -15,63 +15,68 @@ class Backend(plugin_helpers.Backend):
     version = __version__
 
 
-class Plugin:  # pylint: disable=too-few-public-methods
+class Plugin:  # pylint: disable=too-few-public-methods, too-many-branches
     def __init__(self, verbose=False):
         self.backend = Backend(prefix='[TAP]', verbose=verbose)
+        self.verbose = verbose
 
-    def parse(self, tap_file, progress_cb=None):
+    def parse(self, tap_filenames, progress_cb=None):
         self.backend.configure()
 
         test_execution_id = None
         trace_back = []
-        for line in Parser().parse_file(tap_file):
-            if isinstance(line, Result):
-                # before parsing the 'next' result line add
-                # traceback as comment to the previous TE
-                if test_execution_id and trace_back:
-                    self.backend.add_comment(
-                        test_execution_id,
-                        "<pre>\n" + "\n".join(trace_back) + "</pre>"
-                    )
-                trace_back = []
-            elif isinstance(line, Diagnostic):
-                trace_back.append(line.text[2:])
-                continue
-            else:
-                continue
+        for tap_file in tap_filenames:
+            if self.verbose:
+                print(f"Parsing {tap_file} ...")
 
-            test_case, _ = self.backend.test_case_get_or_create(
-                line.description)
-            test_case_id = test_case['id']
+            for line in Parser().parse_file(tap_file):
+                if isinstance(line, Result):
+                    # before parsing the 'next' result line add
+                    # traceback as comment to the previous TE
+                    if test_execution_id and trace_back:
+                        self.backend.add_comment(
+                            test_execution_id,
+                            "<pre>\n" + "\n".join(trace_back) + "</pre>"
+                        )
+                    trace_back = []
+                elif isinstance(line, Diagnostic):
+                    trace_back.append(line.text[2:])
+                    continue
+                else:
+                    continue
 
-            self.backend.add_test_case_to_plan(test_case_id,
-                                               self.backend.plan_id)
-            comment = self.backend.created_by_text
+                test_case, _ = self.backend.test_case_get_or_create(
+                    line.description)
+                test_case_id = test_case['id']
 
-            if line.ok:
-                status_id = self.backend.get_status_id('PASSED')
-            else:
-                status_id = self.backend.get_status_id('FAILED')
+                self.backend.add_test_case_to_plan(test_case_id,
+                                                   self.backend.plan_id)
+                comment = self.backend.created_by_text
 
-            if line.skip:
-                status_id = self.backend.get_status_id('WAIVED')
-                comment = line.directive.text
+                if line.ok:
+                    status_id = self.backend.get_status_id('PASSED')
+                else:
+                    status_id = self.backend.get_status_id('FAILED')
 
-            if line.todo:
-                status_id = self.backend.get_status_id('PAUSED')
-                comment = line.directive.text
+                if line.skip:
+                    status_id = self.backend.get_status_id('WAIVED')
+                    comment = line.directive.text
 
-            for execution in self.backend.add_test_case_to_run(
-                test_case_id,
-                self.backend.run_id,
-            ):
-                test_execution_id = execution["id"]
-                self.backend.update_test_execution(execution["id"],
-                                                   status_id,
-                                                   comment)
+                if line.todo:
+                    status_id = self.backend.get_status_id('PAUSED')
+                    comment = line.directive.text
 
-            if progress_cb:
-                progress_cb()
+                for execution in self.backend.add_test_case_to_run(
+                    test_case_id,
+                    self.backend.run_id,
+                ):
+                    test_execution_id = execution["id"]
+                    self.backend.update_test_execution(execution["id"],
+                                                       status_id,
+                                                       comment)
+
+                if progress_cb:
+                    progress_cb()
 
         self.backend.finish_test_run()
 
@@ -83,8 +88,10 @@ def main(argv):
     )
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                         help='Print information about created TP/TR records')
+    parser.add_argument('filename.tap', type=str, nargs='+',
+                        help='TAP file(s) to parse')
 
-    args = parser.parse_args(argv)
+    args = parser.parse_args(argv[1:])
 
     plugin = Plugin(verbose=args.verbose)
-    plugin.parse(argv[1])
+    plugin.parse(getattr(args, 'filename.tap'))

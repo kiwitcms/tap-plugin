@@ -99,6 +99,16 @@ Usage
 Changelog
 ---------
 
+v11.3 (17 May 2022)
+~~~~~~~~~~~~~~~~~~~
+
+- Update tcms-api from 11.2 to 11.3
+- Print information about created recrods if ``-v`` or ``--verbose``
+  is specified on the command line
+- Allow multiple TAP files to be specified on the command line. Fixes
+  `Issue #57 <https://github.com/kiwitcms/tap-plugin/issues/57>`_
+
+
 v11.2 (15 May 2022)
 ~~~~~~~~~~~~~~~~~~~
 
@@ -109,12 +119,14 @@ v11.2 (15 May 2022)
 - Fix bug with traceback not being posted as comment.
   `Issue #48 <https://github.com/kiwitcms/tap-plugin/issues/48>`_
 
+
 v11.0 (05 Dec 2021)
 ~~~~~~~~~~~~~~~~~~~
 
 - Future compatible with upcoming Kiwi TCMS v11.0
 - Update tcms-api from 10.0 to 11.0
 - Pylint fixes
+
 
 v10.0 (02 Mar 2021)
 ~~~~~~~~~~~~~~~~~~~

@@ -7,6 +7,7 @@ flake8:
 pylint:
 	pylint -d missing-docstring *.py tcms_tap_plugin/
 	pylint -d missing-docstring -d invalid-name -d too-few-public-methods \
+	    --load-plugins=pylint.extensions.no_self_use                      \
 	    -d protected-access -d duplicate-code tests/
 
 

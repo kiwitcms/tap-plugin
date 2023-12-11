@@ -7,12 +7,12 @@ on:
 
 jobs:
   static_analysis:
-    name: ${{ matrix.make-command }}
+    name: ${{ matrix.make-command }} // ${{ matrix.python-version }} // ${{ matrix.kiwitcms-url }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.8]
+        python-version: [3.8, 3.11]
         kiwitcms-url: [tcms.kiwitcms.org, public.tenant.kiwitcms.org]
         make-command: [ci, check-build, tap]
 

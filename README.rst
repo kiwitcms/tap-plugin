@@ -98,6 +98,18 @@ Usage
 Changelog
 ---------
 
+v12.7 (11 Dec 2023)
+~~~~~~~~~~~~~~~~~~~
+
+- Update tcms-api from 11.3 to 12.7
+- Update README to avoid confusions where to install this package. Closes
+  `Issue #62 <https://github.com/kiwitcms/tap-plugin/issues/62>`_
+- Build and test with Python 3.11
+- Reformat source code with Black
+- Enable CodeQL for code scanning
+- Small refactoring internally
+
+
 v11.3 (17 May 2022)
 ~~~~~~~~~~~~~~~~~~~
 

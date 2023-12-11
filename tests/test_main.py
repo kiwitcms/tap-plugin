@@ -17,4 +17,4 @@ class MainFuncTestCase(unittest.TestCase):
 
     @unittest.expectedFailure
     def test_expected_traceback_for_te_comment(self):
-        raise Exception('This is expected')
+        raise RuntimeError('This is expected')

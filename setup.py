@@ -42,7 +42,7 @@ setup(
         "Environment :: Console",
         "Intended Audience :: Developers",
         "Intended Audience :: System Administrators",
-        "License :: OSI Approved :: GNU General Public License v3 " "or later (GPLv3+)",
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         "Operating System :: POSIX",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.8",

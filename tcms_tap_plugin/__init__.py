@@ -17,7 +17,7 @@ class Backend(plugin_helpers.Backend):
 
 class Plugin:  # pylint: disable=too-few-public-methods, too-many-branches
     def __init__(self, verbose=False):
-        self.backend = Backend(prefix='[TAP]', verbose=verbose)
+        self.backend = Backend(prefix="[TAP]", verbose=verbose)
         self.verbose = verbose
 
     def parse(self, tap_filenames, progress_cb=None):
@@ -36,7 +36,7 @@ class Plugin:  # pylint: disable=too-few-public-methods, too-many-branches
                     if test_execution_id and trace_back:
                         self.backend.add_comment(
                             test_execution_id,
-                            "<pre>\n" + "\n".join(trace_back) + "</pre>"
+                            "<pre>\n" + "\n".join(trace_back) + "</pre>",
                         )
                     trace_back = []
                 elif isinstance(line, Diagnostic):
@@ -45,25 +45,23 @@ class Plugin:  # pylint: disable=too-few-public-methods, too-many-branches
                 else:
                     continue
 
-                test_case, _ = self.backend.test_case_get_or_create(
-                    line.description)
-                test_case_id = test_case['id']
+                test_case, _ = self.backend.test_case_get_or_create(line.description)
+                test_case_id = test_case["id"]
 
-                self.backend.add_test_case_to_plan(test_case_id,
-                                                   self.backend.plan_id)
+                self.backend.add_test_case_to_plan(test_case_id, self.backend.plan_id)
                 comment = self.backend.created_by_text
 
                 if line.ok:
-                    status_id = self.backend.get_status_id('PASSED')
+                    status_id = self.backend.get_status_id("PASSED")
                 else:
-                    status_id = self.backend.get_status_id('FAILED')
+                    status_id = self.backend.get_status_id("FAILED")
 
                 if line.skip:
-                    status_id = self.backend.get_status_id('WAIVED')
+                    status_id = self.backend.get_status_id("WAIVED")
                     comment = line.directive.text
 
                 if line.todo:
-                    status_id = self.backend.get_status_id('PAUSED')
+                    status_id = self.backend.get_status_id("PAUSED")
                     comment = line.directive.text
 
                 for execution in self.backend.add_test_case_to_run(
@@ -71,9 +69,9 @@ class Plugin:  # pylint: disable=too-few-public-methods, too-many-branches
                     self.backend.run_id,
                 ):
                     test_execution_id = execution["id"]
-                    self.backend.update_test_execution(execution["id"],
-                                                       status_id,
-                                                       comment)
+                    self.backend.update_test_execution(
+                        execution["id"], status_id, comment
+                    )
 
                 if progress_cb:
                     progress_cb()
@@ -83,15 +81,20 @@ class Plugin:  # pylint: disable=too-few-public-methods, too-many-branches
 
 def main(argv):
     parser = argparse.ArgumentParser(
-        description='Parse the specified TAP files and '
-                    'send the results to Kiwi TCMS'
+        description="Parse the specified TAP files and " "send the results to Kiwi TCMS"
     )
-    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
-                        help='Print information about created TP/TR records')
-    parser.add_argument('filename.tap', type=str, nargs='+',
-                        help='TAP file(s) to parse')
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        dest="verbose",
+        action="store_true",
+        help="Print information about created TP/TR records",
+    )
+    parser.add_argument(
+        "filename.tap", type=str, nargs="+", help="TAP file(s) to parse"
+    )
 
     args = parser.parse_args(argv[1:])
 
     plugin = Plugin(verbose=args.verbose)
-    plugin.parse(getattr(args, 'filename.tap'))
+    plugin.parse(getattr(args, "filename.tap"))

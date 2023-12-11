@@ -7,9 +7,9 @@ from tcms_tap_plugin import main
 
 class MainFuncTestCase(unittest.TestCase):
     def test_when_calling_main_with_arguments_then_parse(self):
-        with patch('tcms_tap_plugin.Plugin.parse') as parse:
-            main([__file__, 'output.tap'])
-            parse.assert_called_with(['output.tap'])
+        with patch("tcms_tap_plugin.Plugin.parse") as parse:
+            main([__file__, "output.tap"])
+            parse.assert_called_with(["output.tap"])
 
     def test_when_calling_main_without_arguments_then_usage(self):
         with self.assertRaisesRegex(SystemExit, "2"):
@@ -17,4 +17,4 @@ class MainFuncTestCase(unittest.TestCase):
 
     @unittest.expectedFailure
     def test_expected_traceback_for_te_comment(self):
-        raise RuntimeError('This is expected')
+        raise RuntimeError("This is expected")

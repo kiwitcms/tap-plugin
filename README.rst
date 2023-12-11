@@ -64,31 +64,25 @@ Minimal config file `~/.tcms.conf`::
 For more info see `tcms-api docs <https://tcms-api.readthedocs.io>`_.
 
 This plugin is only concerned with parsing the TAP format and executing
-`tcms-api` functions which will create/reuse test cases, test plans and test runs.
-`tcms-api` behavior is controlled via environment variables.
+``tcms-api`` functions which will create/reuse test cases, test plans and test runs.
+``tcms-api`` behavior is controlled via environment variables.
 
-For example this is how our own environment looks like::
+For example inside
+`.github/workflows/testing.yml <https://github.com/kiwitcms/tap-plugin/blob/master/.github/workflows/testing.yml>`_
+this looks like::
 
-    #!/bin/bash
+    export TCMS_PRODUCT=$GITHUB_REPOSITORY
+    export TCMS_PRODUCT_VERSION=$(echo $GITHUB_REF | sed "s|refs/heads/||" | sed "s|refs/||" | sed "s|/merge||")
+    export TCMS_BUILD=$(echo $GITHUB_SHA | cut -c1-7)
 
-    if [ "$TRAVIS_EVENT_TYPE" == "push" ]; then
-        # same as $TRAVIS_TAG when building tags
-        export TCMS_PRODUCT_VERSION=$TRAVIS_BRANCH
-    fi
-
-    if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ]; then
-        export TCMS_PRODUCT_VERSION="PR-$TRAVIS_PULL_REQUEST"
-    fi
-
-    export TCMS_BUILD="$TRAVIS_BUILD_NUMBER-$(echo $TRAVIS_COMMIT | cut -c1-7)"
 
 Further documentation and behavior specification can be found
 `here <https://tcms-api.readthedocs.io/en/latest/modules/tcms_api.plugin_helpers.html>`_.
 
-The above configuration creates a separate TestPlan for each branch, see
+The above configuration creates a separate TestPlan for each branch, for example
 `TP-6: [TAP] Plan for kiwitcms/tap-plugin (master) <https://tcms.kiwitcms.org/plan/6/>`_,
 a separate TestPlan for each pull request (recording possible multiple test runs) and
-separate TestPlan and TestRun for each tag on GitHub! `tcms-api` has default behavior
+separate TestPlan and TestRun for each tag on GitHub! ``tcms-api`` has default behavior
 for Travis CI and Jenkins and allows endless configuration via environment variables.
 
 

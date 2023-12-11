@@ -45,6 +45,11 @@ Installation
     pip install kiwitcms-tap-plugin
 
 
+Note: this plugin should be installed on the system executing your automated tests
+or a separate system whose task is to parse the results and import them into Kiwi TCMS.
+This is usually not your Kiwi TCMS container!
+
+
 Configuration and environment
 -----------------------------
 

@@ -1,10 +1,10 @@
 -r requirements.txt
 
-nose
-nose-tap
 coverage
 flake8
 pylint
+pytest-coverage
+pytest-tap
 twine
 pyOpenSSL
 readme_renderer[md]

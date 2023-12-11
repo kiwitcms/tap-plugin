@@ -13,7 +13,7 @@ pylint:
 
 .PHONY: test
 test:
-	nosetests -v --with-coverage --cover-erase --cover-package=tcms_tap_plugin
+	pytest -v --cov=tcms_tap_plugin
 
 
 .PHONY: tap

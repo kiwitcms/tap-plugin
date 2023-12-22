@@ -98,6 +98,13 @@ Usage
 Changelog
 ---------
 
+v12.8.1 (22 Dec 2023)
+~~~~~~~~~~~~~~~~~~~~~
+
+- Update tcms-api from 12.7 to 12.8.1
+- Relax dependency requirement towards tcms-api for easier upgrade
+
+
 v12.7 (11 Dec 2023)
 ~~~~~~~~~~~~~~~~~~~
 

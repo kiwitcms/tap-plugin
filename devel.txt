@@ -3,6 +3,9 @@
 coverage
 flake8
 pylint
+# pytest-tap 3.5 maps both --tap and --tap-stream to dest tap_stream and
+# pytest 9.2 rejects duplicate destinations
+pytest<9.2
 pytest-coverage
 pytest-tap
 twine
